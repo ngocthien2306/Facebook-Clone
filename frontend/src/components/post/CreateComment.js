@@ -4,6 +4,9 @@ import { comment } from "../../functions/post";
 import { uploadImages } from "../../functions/uploadImages";
 import dataURItoBlob from "../../helpers/dataURItoBlob";
 import { ClipLoader } from "react-spinners";
+import { NotificationManager } from 'react-notifications';
+import axios from "axios";
+
 export default function CreateComment({ user, postId, setComments, setCount }) {
   const [picker, setPicker] = useState(false);
   const [text, setText] = useState("");
@@ -48,6 +51,20 @@ export default function CreateComment({ user, postId, setComments, setCount }) {
   };
   const handleComment = async (e) => {
     if (e.key === "Enter") {
+      const { data: { result } } = await axios.get(
+        `${process.env.REACT_APP_MACHINE_LEARNING_URL}/messages/predict`,
+        {
+          params: {
+            txt: text
+          },
+        }
+      );
+
+      if (result === "Neg") {
+        NotificationManager.error("Please comment positive", 'Comment Error', 5000)
+        return null;
+      }
+      debugger
       if (commentImage != "") {
         setLoading(true);
         const img = dataURItoBlob(commentImage);
@@ -63,14 +80,13 @@ export default function CreateComment({ user, postId, setComments, setCount }) {
           imgComment[0].url,
           user.token
         );
-        setComments(comments);
+        setComments(comments)
         setCount((prev) => ++prev);
         setLoading(false);
         setText("");
         setCommentImage("");
       } else {
         setLoading(true);
-
         const comments = await comment(postId, text, "", user.token);
         setComments(comments);
         setCount((prev) => ++prev);

@@ -12,6 +12,8 @@ import { useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import { postsReducer } from "./functions/reducers";
 import Friends from "./pages/friends";
+import { NotificationContainer } from 'react-notifications';
+import "react-notifications/lib/notifications.css";
 
 function App() {
   const [visible, setVisible] = useState(false);
@@ -107,6 +109,7 @@ function App() {
         </Route>
         <Route path="/reset" element={<Reset />} />
       </Routes>
+      <NotificationContainer />
     </div>
   );
 }

@@ -80,6 +80,7 @@ export const comment = async (postId, comment, image, token) => {
       }
     );
     return data;
+
   } catch (error) {
     return error.response.data.message;
   }
