@@ -51,9 +51,13 @@ export default function LoginForm({ setVisible }) {
   return (
     <div className="login_wrap">
       <div className="login_1">
-        <img src="../../icons/facebook.svg" alt="" />
+        <h1 style={{
+          color: "#1877F2",
+          letterSpacing: "10px",
+          fontSize: "4rem"
+        }}>MyBLog</h1>
         <span>
-          Facebook helps you connect and share with the people in your life.
+          MyBLog helps you connect and share with the people in your life.
         </span>
       </div>
       <div className="login_2">
@@ -104,10 +108,7 @@ export default function LoginForm({ setVisible }) {
             Create Account
           </button>
         </div>
-        <Link to="/" className="sign_extra">
-          <b>Create a Page</b> for a celebrity, brand or business.
-        </Link>
       </div>
-    </div>
+    </div >
   );
 }
