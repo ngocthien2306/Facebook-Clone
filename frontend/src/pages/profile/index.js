@@ -129,22 +129,20 @@ export default function Profile({ getAllPosts }) {
             photos={photos.resources}
             othername={othername}
           />
-          <ProfileMenu />
+          {/* <ProfileMenu /> */}
         </div>
       </div>
       <div className="profile_bottom">
         <div className="profile_container">
           <div className="bottom_container">
-            <PplYouMayKnow />
             <div
-              className={`profile_grid ${
-                check && scrollHeight >= height && leftHeight > 1000
-                  ? "scrollFixed showLess"
-                  : check &&
-                    scrollHeight >= height &&
-                    leftHeight < 1000 &&
-                    "scrollFixed showMore"
-              }`}
+              className={`profile_grid ${check && scrollHeight >= height && leftHeight > 1000
+                ? "scrollFixed showLess"
+                : check &&
+                scrollHeight >= height &&
+                leftHeight < 1000 &&
+                "scrollFixed showMore"
+                }`}
             >
               <div className="profile_left" ref={leftSide}>
                 <Intro
@@ -158,28 +156,11 @@ export default function Profile({ getAllPosts }) {
                   photos={photos}
                 />
                 <Friends friends={profile.friends} />
-                <div className="relative_fb_copyright">
-                  <Link to="/">Privacy </Link>
-                  <span>. </span>
-                  <Link to="/">Terms </Link>
-                  <span>. </span>
-                  <Link to="/">Advertising </Link>
-                  <span>. </span>
-                  <Link to="/">
-                    Ad Choices <i className="ad_choices_icon"></i>{" "}
-                  </Link>
-                  <span>. </span>
-                  <Link to="/"></Link>Cookies <span>. </span>
-                  <Link to="/">More </Link>
-                  <span>. </span> <br />
-                  Meta © 2022
-                </div>
               </div>
               <div className="profile_right">
                 {!visitor && (
                   <CreatePost user={user} profile setVisible={setVisible} />
                 )}
-                <GridPosts />
                 <div className="posts">
                   {profile.posts && profile.posts.length ? (
                     profile.posts.map((post) => (
